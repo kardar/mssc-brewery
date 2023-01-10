@@ -5,6 +5,7 @@ import guru.springframework.msscbrewery.web.model.BeerDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintDeclarationException;
@@ -34,7 +35,7 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
+    public ResponseEntity saveNewBeer(@Validated @RequestBody BeerDto beerDto) {
 
         //TODO functionality will be added later
         BeerDto savedDto = beerService.saveNewBeer(beerDto);
@@ -43,7 +44,7 @@ public class BeerController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
     @PutMapping("/{beerId}")
-    public ResponseEntity updateBeerById(@PathVariable("beerId")UUID beerId,@Valid @RequestBody BeerDto beerDto){
+    public ResponseEntity updateBeerById(@PathVariable("beerId")UUID beerId,@Validated @RequestBody BeerDto beerDto){
         //TODO functionality will be added later
         beerService.updateBeer(beerId,beerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
